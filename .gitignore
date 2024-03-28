@@ -1,4 +1,12 @@
+## Orig ##
 vendor
 dist
 .idea
 /shellz
+
+## Vim ##
+*~
+*.swp
+
+## Other ##
+tmp
