@@ -13,6 +13,12 @@ trim_trailing_whitespace = true
 # Matches Go files
 [*.go]
 indent_style = tab
+indent_size = 2
+
+# Matches YAML files
+[*.{yml,yaml}]
+indent_style = tab
+indent_size = 2
 
 # Matches the exact files either .gitignore, .env, .env.test
 [{.gitignore,.env,.env.test}]

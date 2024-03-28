@@ -1,0 +1,22 @@
+name: Nightly job
+
+on:
+    workflow_dispatch:
+    schedule:
+        # Every day at 00:00
+        - cron: '0 0 * * *'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                name: Checkout code
+                uses: actions/checkout@v2
+
+            -
+                name: Run job
+                run: |
+                    git remote add upstream https://github.com/evilsocket/shellz.git
+                    git fetch -av upstream
+                    git push origin upstream/master:upstream
