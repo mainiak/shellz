@@ -1,6 +1,6 @@
 module github.com/evilsocket/shellz
 
-go 1.16
+go 1.22
 
 require (
 	github.com/Azure/go-ntlmssp v0.0.0-20200615164410-66371956d46c // indirect
