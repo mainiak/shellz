@@ -7,8 +7,8 @@ require (
 	github.com/evilsocket/islazy v1.10.6
 	github.com/masterzen/winrm v0.0.0-20210623064412-3b76017826b0
 	github.com/reiver/go-telnet v0.0.0-20180421082511-9ff0b2ab096e
-	golang.org/x/crypto v0.17.0
-	golang.org/x/net v0.17.0
+	golang.org/x/crypto v0.21.0
+	golang.org/x/net v0.23.0
 	k8s.io/api v0.22.0
 	k8s.io/client-go v0.22.0
 )
@@ -32,8 +32,8 @@ require (
 	github.com/reiver/go-oi v1.0.0 // indirect
 	github.com/robertkrimen/otto v0.0.0-20210614181706-373ff5438452 // indirect
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
-	golang.org/x/sys v0.15.0 // indirect
-	golang.org/x/term v0.15.0 // indirect
+	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/term v0.18.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect
 	google.golang.org/appengine v1.6.5 // indirect
