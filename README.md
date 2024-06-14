@@ -1,26 +1,30 @@
 <p align="center">
-  <img alt="shellz" src="https://raw.githubusercontent.com/evilsocket/shellz/master/logo.png" />
+  <img alt="shellz" src="https://raw.githubusercontent.com/mainiak/shellz/master/logo.png" />
   <p align="center">
-    <a href="https://github.com/evilsocket/shellz/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/evilsocket/shellz.svg?style=flat-square"></a>
-    <a href="https://github.com/evilsocket/shellz/blob/master/LICENSE.md"><img alt="Software License" src="https://img.shields.io/badge/license-GPL3-brightgreen.svg?style=flat-square"></a>
-    <a href="https://travis-ci.org/evilsocket/shellz"><img alt="Travis" src="https://img.shields.io/travis/evilsocket/shellz/master.svg?style=flat-square"></a>
-    <a href="https://goreportcard.com/report/github.com/evilsocket/shellz"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/evilsocket/shellz?style=flat-square&fuckgithubcache=1"></a>
+    <a href="https://goreportcard.com/report/github.com/mainiak/shellz"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/mainiak/shellz?style=flat-square&fuckgithubcache=1"></a>
+    <a href="https://github.com/mainiak/shellz/blob/master/LICENSE.md"><img alt="Software License" src="https://img.shields.io/badge/license-GPL3-brightgreen.svg?style=flat-square"></a>
+    <a href="https://github.com/mainiak/shellz/actions/workflows/build.yml"><img alt="GitHub Action build status" src="https://github.com/mainiak/shellz/actions/workflows/build.yml/badge.svg"></a>
+    <a href="https://github.com/mainiak/shellz/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/mainiak/shellz.svg?style=flat-square"></a>
   </p>
 </p>
 
-`shellz` is a small utility to manage your `ssh`, `telnet`, `kubernetes`, `winrm`, `web` or any custom shell in a single place. 
+## About
+
+`shellz` is a small utility to manage your `ssh`, `telnet`, `kubernetes`, `winrm`, `web` or any custom shell in a single place.
 
 This means that with a single tool with a simple command line, you will be able to execute shell commands on any of those systems transparently, so that you can, for instance, check the uptime of all your systems, whether it is a Windows machine, a Kubernetes pod, an SSH server or a Raspbery Pi like [shown in this demo](https://www.youtube.com/watch?v=ZjMRbUhw9z4).
 
+This project was forked from [evilsocket/shellz](https://github.com/evilsocket/shellz)
+
 ## Installation
 
-A [precompiled version is available for each release](https://github.com/evilsocket/shellz/releases), alternatively you can use the latest version of the source code from this repository in order to build your own binary.
+A [precompiled version is available for each release](https://github.com/mainiak/shellz/releases), alternatively you can use the latest version of the source code from this repository in order to build your own binary.
 
 ### From Sources
 
-Make sure you have a correctly configured **Go >= 1.8** environment, that `$GOPATH/bin` is in `$PATH` and then:
+Make sure you have a correctly configured **Go >= 1.22** environment, that `$GOPATH/bin` is in `$PATH` and then:
 
-    $ go get -u github.com/evilsocket/shellz/cmd/shellz
+    $ go get -u github.com/mainiak/shellz/cmd/shellz
 
 This command will download shellz, install its dependencies, compile it and move the `shellz` executable to `$GOPATH/bin`.
 
@@ -46,7 +50,7 @@ As you can see my `default` identity is using my SSH private key to log in the `
 }
 ```
 
-### SSH 
+### SSH
 
 Now let's create our first shell json file ( `~/.shellz/shells/media.json` ) that will use the `default` identity we just created to connect to our home media server (called `media.server` in our example):
 
@@ -59,6 +63,8 @@ Now let's create our first shell json file ( `~/.shellz/shells/media.json` ) tha
     "identity": "default"
 }
 ```
+
+Shellz now has `.ssh/config` parsing support.
 
 ### Telnet
 
@@ -95,7 +101,7 @@ cat ~/.shellz/shells/win.json
 }
 ```
 
-### Kubernetes 
+### Kubernetes
 
 ```sh
 cat ~/.shellz/shells/kube-pod.json
@@ -118,7 +124,7 @@ cat ~/.shellz/shells/kube-pod.json
 
 Where the host field must point to the Kubernetes control plane URL obtained with:
 
-    kubectl cluster-info | grep control 
+    kubectl cluster-info | grep control
 
 ```sh
 cat ~/.shellz/idents/microk8s.json
@@ -134,7 +140,7 @@ cat ~/.shellz/idents/microk8s.json
 Where the `~/.microk8s-bearer-token` file must contain the bearer token obtained with:
 
     token=$(kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
-    kubectl -n kube-system describe secret $token | grep "token:"    
+    kubectl -n kube-system describe secret $token | grep "token:"
 
 ### SOCKS5
 
@@ -155,7 +161,7 @@ If you wish to use a SOCKS5 proxy (supported for the `ssh` session and custom sh
 }
 ```
 
-### Using Groups 
+### Using Groups
 
 Shells can (optionally) be grouped (with a default `all` group containing all of them) and, by default, they are considered `ssh`, in which case you can also specify the ciphers your server supports:
 
@@ -170,7 +176,7 @@ Shells can (optionally) be grouped (with a default `all` group containing all of
     "ciphers": ["aes128-cbc", "3des-cbc"]
 }
 ```
-    
+
 ### Reverse Tunnels
 
 `shellz` can be used for starting reverse SSH tunnels, for instance, let's create the `~/.shellz/shells/mytunnel.json` file:
@@ -200,7 +206,7 @@ The remote endpoint `https://192.168.1.1` will be tunneled by `example.com` and 
 
 ### Plugins
 
-Instead of one of the supported types, you can specify a custom name, in which case shellz will use an external plugin. 
+Instead of one of the supported types, you can specify a custom name, in which case shellz will use an external plugin.
 
 Let's start by creating a new shell json file `~/.shellz/shells/custom.json` with the following contents:
 
@@ -220,7 +226,7 @@ As you probably noticed, the `host` field is the full URL of a very simple PHP w
 <?php system($_REQUEST["cmd"]); die; ?>
 ```
 
-Also, the `type` field is set to `mycustomshell`, in this case `shellz` will try to load the file `~/.shellz/plugins/mycustomshell.js` and use it to create a session and execute a command. 
+Also, the `type` field is set to `mycustomshell`, in this case `shellz` will try to load the file `~/.shellz/plugins/mycustomshell.js` and use it to create a session and execute a command.
 
 A `shellz` plugin must export the `Create`, `Exec` and `Close` functions, this is how `mycustomshell.js` looks like:
 
@@ -231,7 +237,7 @@ var headers = {
 
 /*
  * The Create callback is called whenever a new command has been queued
- * for execution and the session should be initiated, in this case we 
+ * for execution and the session should be initiated, in this case we
  * simply return the main shell object, but it might be used to connect
  * to the endpoint and store the socket on a more complex Object.
  */
@@ -247,7 +253,7 @@ function Create(sh) {
  */
 function Exec(sh, cmd) {
     log.Debug("running " + cmd + " on " + sh.Host);
-    /* 
+    /*
      * OR
      *
      * var resp = http.Post(sh.Host, headers, {"cmd":cmd});
@@ -356,7 +362,7 @@ Run the command `uptime` on every shell and append all outputs to the `all.txt` 
 
     shellz -run uptime -to all.txt
 
-Run the command `uptime` on every shell and save each outputs to a different file using per-shell data (every field referenced between `{{` and `}}` will be replaced by the json field of the [shell object](https://github.com/evilsocket/shellz/blob/master/models/shell.go#L23)):
+Run the command `uptime` on every shell and save each outputs to a different file using per-shell data (every field referenced between `{{` and `}}` will be replaced by the json field of the [shell object](https://github.com/mainiak/shellz/blob/master/models/shell.go#L23)):
 
     shellz -run uptime -to "{{.Identity.Username}}_{{.Name}}.txt"
 
@@ -368,4 +374,4 @@ For a list of all available flags and some usage examples just type `shellz` wit
 
 ## License
 
-Shellz was made with ♥  by [Simone Margaritelli](https://www.evilsocket.net/) and it's released under the GPL 3 license.
+Shellz was originally made with ♥  by [Simone Margaritelli](https://www.evilsocket.net/) and it's released under the GPL 3 license.
