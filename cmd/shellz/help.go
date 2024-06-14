@@ -59,6 +59,7 @@ func init() {
 	flag.DurationVar(&timeouts.Read, "read-timeout", timeouts.Read, "Read timeout.")
 	flag.DurationVar(&timeouts.Write, "write-timeout", timeouts.Write, "Write timeout.")
 
+	flag.BoolVar(&doDebug, "debug", doDebug, "Set log level to Debug")
 	flag.IntVar((*int)(&log.Level), "log-level", int(log.Level), "Set log level.")
 	flag.StringVar(&log.Output, "log-file", log.Output, "Log messages on this file instead of the standard output.")
 	flag.BoolVar(&log.NoEffects, "no-effects", log.NoEffects, "Disable text effects and colors.")

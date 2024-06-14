@@ -15,6 +15,10 @@ func main() {
 	}
 	defer log.Close()
 
+	if doDebug {
+		log.Level = log.DEBUG
+	}
+
 	if !noBanner {
 		log.Raw(core.Banner)
 	}

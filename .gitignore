@@ -1,8 +1,11 @@
+## Build ##
+build
+/shellz
+
 ## Orig ##
 vendor
 dist
 .idea
-/shellz
 
 ## Vim ##
 *~
