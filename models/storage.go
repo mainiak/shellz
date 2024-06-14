@@ -17,8 +17,13 @@ func Load() (error, Identities, Shells, Groups) {
 	shells := make(Shells)
 	groups := make(Groups)
 
+	err := loadSSHConfig(idents, shells, groups)
+	if err != nil {
+		return err, nil, nil, nil
+	}
+
 	log.Debug("loading identities from %s ...", Paths["idents"])
-	err := fs.Glob(Paths["idents"], "*.json", func(fileName string) error {
+	err = fs.Glob(Paths["idents"], "*.json", func(fileName string) error {
 		if err, ident := LoadIdent(fileName); err != nil {
 			return fmt.Errorf("error while loading identity '%s': %s", fileName, err)
 		} else if taken, found := idents[ident.Name]; found {

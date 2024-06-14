@@ -42,8 +42,8 @@ type Shell struct {
 	Comment      string    `json:"-"`
 }
 
-func LoadShell(path string, idents Identities) (err error, shell Shell) {
-	shell = Shell{
+func NewShell(path string) Shell {
+	return Shell{
 		Enabled:      defaultEnabled,
 		Path:         path,
 		Host:         defaultHost,
@@ -57,6 +57,10 @@ func LoadShell(path string, idents Identities) (err error, shell Shell) {
 		Pod:          defaultPod,
 		Comment:      defaultComment,
 	}
+}
+
+func LoadShell(path string, idents Identities) (err error, shell Shell) {
+	shell = NewShell(path)
 
 	file, err := os.Open(path)
 	if err != nil {

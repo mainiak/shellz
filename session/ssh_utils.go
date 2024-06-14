@@ -8,8 +8,8 @@ import (
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
 
-	"github.com/evilsocket/shellz/core"
 	"github.com/evilsocket/islazy/log"
+	"github.com/evilsocket/shellz/core"
 	"github.com/evilsocket/shellz/models"
 
 	"github.com/evilsocket/islazy/fs"

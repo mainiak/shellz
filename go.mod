@@ -5,6 +5,7 @@ go 1.22
 require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/evilsocket/islazy v1.10.6
+	github.com/kevinburke/ssh_config v1.2.0
 	github.com/masterzen/winrm v0.0.0-20210623064412-3b76017826b0
 	github.com/reiver/go-telnet v0.0.0-20180421082511-9ff0b2ab096e
 	golang.org/x/crypto v0.21.0
