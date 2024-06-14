@@ -20,6 +20,7 @@ func showIdentsList() {
 		"Key",
 		"Password",
 		// "Path",
+		"Comment",
 	}
 
 	keys := []string{}
@@ -38,6 +39,10 @@ func showIdentsList() {
 		if pass == "" {
 			pass = tui.Dim("<empty>")
 		}
+		comment := i.Comment
+		if comment == "" {
+			comment = tui.Dim("<empty>")
+		}
 
 		rows = append(rows, []string{
 			tui.Bold(i.Name),
@@ -45,6 +50,7 @@ func showIdentsList() {
 			key,
 			pass,
 			// tui.Dim(i.Path),
+			comment,
 		})
 	}
 
@@ -88,6 +94,7 @@ func showShellsList() {
 		"Port",
 		"Identity",
 		"Enabled",
+		"Comment",
 	}
 
 	hasTunnel := false
@@ -108,6 +115,7 @@ func showShellsList() {
 			"Port",
 			"Identity",
 			"Enabled",
+			"Comment",
 		}
 	}
 
@@ -136,6 +144,7 @@ func showShellsList() {
 				fmt.Sprintf("%d", sh.Port),
 				tui.Yellow(sh.IdentityName),
 				en,
+				sh.Comment,
 			}
 		} else {
 			row = []string{
@@ -146,6 +155,7 @@ func showShellsList() {
 				fmt.Sprintf("%d", sh.Port),
 				tui.Yellow(sh.IdentityName),
 				en,
+				sh.Comment,
 			}
 		}
 

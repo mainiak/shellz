@@ -18,6 +18,7 @@ const (
 	defaultNamespace = "default"
 	defaultContainer = ""
 	defaultPod       = ""
+	defaultComment   = ""
 )
 
 type Shell struct {
@@ -38,6 +39,7 @@ type Shell struct {
 	Pod          string    `json:"pod"`
 	Identity     *Identity `json:"-"`
 	Path         string    `json:"-"`
+	Comment      string    `json:"-"`
 }
 
 func LoadShell(path string, idents Identities) (err error, shell Shell) {
@@ -53,6 +55,7 @@ func LoadShell(path string, idents Identities) (err error, shell Shell) {
 		Namespace:    defaultNamespace,
 		Container:    defaultContainer,
 		Pod:          defaultPod,
+		Comment:      defaultComment,
 	}
 
 	file, err := os.Open(path)

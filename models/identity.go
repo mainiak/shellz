@@ -12,6 +12,7 @@ type Identity struct {
 	KeyFile  string `json:"key"`
 	Password string `json:"password"`
 	Path     string `json:"-"`
+	Comment  string `json:"-"`
 }
 
 func LoadIdent(path string) (err error, ident Identity) {
