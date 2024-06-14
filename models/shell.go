@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 )
 
@@ -61,7 +61,7 @@ func LoadShell(path string, idents Identities) (err error, shell Shell) {
 	}
 	defer file.Close()
 
-	raw, err := ioutil.ReadAll(file)
+	raw, err := io.ReadAll(file)
 	if err != nil {
 		return
 	}
@@ -80,7 +80,7 @@ func LoadShell(path string, idents Identities) (err error, shell Shell) {
 func (sh Shell) Save() error {
 	if data, err := json.MarshalIndent(sh, "", "  "); err != nil {
 		return err
-	} else if err = ioutil.WriteFile(sh.Path, data, 0644); err != nil {
+	} else if err = os.WriteFile(sh.Path, data, 0644); err != nil {
 		return err
 	}
 	return nil

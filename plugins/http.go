@@ -2,11 +2,11 @@ package plugins
 
 import (
 	"bytes"
-	"golang.org/x/net/proxy"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
+
+	"golang.org/x/net/proxy"
 
 	"github.com/evilsocket/shellz/models"
 )
@@ -81,7 +81,7 @@ func (c httpPackage) Request(method string, uri string, headers map[string]strin
 	}
 	defer resp.Body.Close()
 
-	raw, err := ioutil.ReadAll(resp.Body)
+	raw, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return httpResponse{Error: err}
 	}
